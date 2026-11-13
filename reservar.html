@@ -51,6 +51,15 @@
     <section class="booking-form" aria-labelledby="t-form">
       <h2 class="sr-only" id="t-form">Formulario de reserva</h2>
 
+      <div class="no-booking" id="sinReservas" hidden>
+        <h3>Las reservas online todavía no están activas en esta dirección</h3>
+        <p>Pide tu cita por teléfono o por Instagram.</p>
+        <div class="btn-row">
+          <a class="btn" href="tel:+34643597025">Llamar al +34 643 59 70 25</a>
+          <a class="btn ghost" href="https://instagram.com/vic.barberrr_" target="_blank" rel="noreferrer">Escribir por Instagram</a>
+        </div>
+      </div>
+
       <!-- SUCCESS BOX -->
       <div class="success-box" id="successBox" role="status" aria-live="polite">
         <h3>✓ Reserva confirmada</h3>
@@ -145,6 +154,15 @@
 <script src="vendor/ScrollTrigger.min.js" defer></script>
 <script src="js/site.js" defer></script>
 <script src="js/telegram-config.js"></script>
+<script>
+  // Sin js/telegram-config.js no hay a dónde enviar la reserva: en vez de
+  // confirmar citas que nadie recibiría, se oculta el formulario y se avisa.
+  if (!window.VIC_TELEGRAM || !window.VIC_TELEGRAM.BOT_TOKEN) {
+    window.VIC_TELEGRAM = { BOT_TOKEN: '', CHAT_ID: '' };
+    document.getElementById('reservaForm').hidden = true;
+    document.getElementById('sinReservas').hidden = false;
+  }
+</script>
 <script src="js/reservas.js"></script>
 <script src="js/reservas-ui.js"></script>
 </body>
