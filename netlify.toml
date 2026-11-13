@@ -1,0 +1,29 @@
+# Sitio estático: no hay compilación. La función de reservas vive en netlify/functions.
+[build]
+  publish = "."
+
+[functions]
+  directory = "netlify/functions"
+
+# Nada de esto debe servirse nunca, aunque llegara a subirse por error.
+[[redirects]]
+  from = "/js/telegram-config.js"
+  to = "/404"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/_backup_original_*"
+  to = "/404"
+  status = 404
+  force = true
+
+[[headers]]
+  for = "/media/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

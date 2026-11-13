@@ -155,13 +155,34 @@
 <script src="js/site.js" defer></script>
 <script src="js/telegram-config.js"></script>
 <script>
-  // Sin js/telegram-config.js no hay a dónde enviar la reserva: en vez de
-  // confirmar citas que nadie recibiría, se oculta el formulario y se avisa.
-  if (!window.VIC_TELEGRAM || !window.VIC_TELEGRAM.BOT_TOKEN) {
-    window.VIC_TELEGRAM = { BOT_TOKEN: '', CHAT_ID: '' };
-    document.getElementById('reservaForm').hidden = true;
-    document.getElementById('sinReservas').hidden = false;
-  }
+  // Dos formas de enviar la reserva, sin cambiar js/reservas.js:
+  //  1) Con js/telegram-config.js (en local): envío directo, como siempre.
+  //  2) Sin ese archivo (web publicada): la misma petición se desvía a la
+  //     función del servidor, que es quien guarda el token.
+  // Si no hay ninguna de las dos, se avisa en vez de confirmar citas que
+  // nadie recibiría.
+  (function () {
+    if (window.VIC_TELEGRAM && window.VIC_TELEGRAM.BOT_TOKEN) return;
+    var form = document.getElementById('reservaForm');
+    var aviso = document.getElementById('sinReservas');
+    var SERVIDOR = '/.netlify/functions/reserva';
+    var fetchOriginal = window.fetch.bind(window);
+    window.VIC_TELEGRAM = { BOT_TOKEN: 'servidor', CHAT_ID: '' };
+    form.hidden = true;
+    fetchOriginal(SERVIDOR)
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        if (!d || !d.activo) throw new Error('sin servidor');
+        window.fetch = function (url, opciones) {
+          if (typeof url === 'string' && url.indexOf('https://api.telegram.org/bot') === 0) {
+            return fetchOriginal(SERVIDOR, opciones);
+          }
+          return fetchOriginal(url, opciones);
+        };
+        form.hidden = false;
+      })
+      .catch(function () { aviso.hidden = false; });
+  })();
 </script>
 <script src="js/reservas.js"></script>
 <script src="js/reservas-ui.js"></script>
