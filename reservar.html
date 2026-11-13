@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Reservar cita | Vic Barbershop</title>
+  <meta name="description" content="Reserva tu cita en Vic Barbershop: elige servicio, día y hora. Confirmación inmediata.">
+  <meta name="theme-color" content="#0c0c0b">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Reservar cita | Vic Barbershop">
+  <meta property="og:description" content="Reserva tu cita en Vic Barbershop: elige servicio, día y hora. Confirmación inmediata.">
+  <meta property="og:image" content="media/og.jpg">
+  <link rel="icon" href="media/icon-180.png">
+  <link rel="apple-touch-icon" href="media/icon-180.png">
+  <link rel="preload" href="fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<header class="nav">
+  <a class="brand" href="index.html" aria-label="Vic Barbershop, inicio">
+    <img src="media/logo-128.webp" width="40" height="40" alt="">
+    <span>Vic Barbershop</span>
+  </a>
+  <nav class="nav-links" aria-label="Navegación principal">
+    <a href="index.html">Inicio</a>
+    <a href="servicios.html">Servicios</a>
+    <a href="contacto.html">Contacto</a>
+    <a class="btn" href="reservar.html" aria-current="page">Reservar</a>
+  </nav>
+  <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu-movil">Menú</button>
+</header>
+<nav class="mobile-nav" id="menu-movil" aria-label="Navegación móvil">
+  <div>
+    <a class="big" href="index.html">Inicio</a>
+    <a class="big" href="servicios.html">Servicios</a>
+    <a class="big" href="reservar.html" aria-current="page">Reservar</a>
+    <a class="big" href="contacto.html">Contacto</a>
+  </div>
+  <a class="btn" href="reservar.html">Reservar cita</a>
+</nav>
+<main id="contenido">
+  <section class="page-head" data-reveal-group style="padding-bottom: clamp(40px, 5vw, 72px)">
+    <div class="copy" style="grid-column: 1 / -1">
+      <h1 data-reveal>Pide tu cita.</h1>
+      <p class="lede" data-reveal>Elige el día, la hora y el servicio. Las reservas son instantáneas y recibirás confirmación inmediata.</p>
+    </div>
+  </section>
+
+  <div class="booking">
+    <section class="booking-form" aria-labelledby="t-form">
+      <h2 class="sr-only" id="t-form">Formulario de reserva</h2>
+
+      <!-- SUCCESS BOX -->
+      <div class="success-box" id="successBox" role="status" aria-live="polite">
+        <h3>✓ Reserva confirmada</h3>
+        <p id="successText"></p>
+        <button class="btn" type="button" onclick="resetForm()">Hacer otra reserva</button>
+      </div>
+
+      <!-- FORM -->
+      <div class="form" id="reservaForm">
+        <div class="field-group">
+          <span class="field-label" id="l-servicio">Servicio</span>
+          <div class="service-picker" role="group" aria-labelledby="l-servicio">
+              <button class="service-opt" type="button" data-value="Corte (5€)" aria-pressed="false"><span class="n">Corte</span><span class="p">5&nbsp;€</span></button>
+              <button class="service-opt" type="button" data-value="Corte + Cejas (7€)" aria-pressed="false"><span class="n">Corte + Cejas</span><span class="p">7&nbsp;€</span></button>
+              <button class="service-opt" type="button" data-value="Corte + Barba (8€)" aria-pressed="false"><span class="n">Corte + Barba</span><span class="p">8&nbsp;€</span></button>
+              <button class="service-opt" type="button" data-value="Decoloración / Mechas (25€)" aria-pressed="false"><span class="n">Decoloración / Mechas</span><span class="p">25&nbsp;€</span></button>
+          </div>
+          <select id="servicio" class="sr-only" tabindex="-1" aria-hidden="true">
+            <option value="">Elegir servicio</option>
+            <option value="Corte (5€)">Corte — 5€</option>
+            <option value="Corte + Cejas (7€)">Corte + Cejas — 7€</option>
+            <option value="Corte + Barba (8€)">Corte + Barba — 8€</option>
+            <option value="Decoloración / Mechas (25€)">Decoloración / Mechas — 25€</option>
+          </select>
+        </div>
+
+        <div class="field-group">
+          <span class="field-label" id="l-dia">Día</span>
+          <div class="day-strip" id="dayStrip" role="group" aria-labelledby="l-dia"></div>
+          <div class="date-alt">
+            <label for="fecha">O elige otra fecha</label>
+            <input type="date" id="fecha" onchange="renderHoras()">
+          </div>
+        </div>
+
+        <div class="field-group" id="horasWrap" style="display:none;">
+          <span class="field-label">Hora disponible</span>
+          <div class="time-grid" id="timeGrid"></div>
+          <span class="error-msg" id="horaError" role="alert">Selecciona una hora disponible.</span>
+        </div>
+
+        <div class="field-grid">
+          <div class="field-group">
+            <label class="field-label" for="nombre">Nombre completo</label>
+            <input type="text" id="nombre" placeholder="Tu nombre" autocomplete="name">
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="telefono">Teléfono</label>
+            <input type="tel" id="telefono" placeholder="+34 600 000 000" autocomplete="tel" inputmode="tel">
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="nota">Nota <small>(opcional)</small></label>
+          <textarea id="nota" placeholder="Alguna preferencia o comentario..."></textarea>
+        </div>
+
+        <span class="error-msg" id="formError" role="alert"></span>
+        <button class="btn" type="button" onclick="enviarReserva()">Confirmar reserva</button>
+      </div>
+    </section>
+
+    <aside class="booking-info" aria-labelledby="t-info">
+      <h2 id="t-info">Información útil</h2>
+      <ul>
+        <li><strong>Horario</strong>Lunes a sábado de 10:00 a 18:00. Citas cada 30 minutos.</li>
+        <li><strong>Confirmación inmediata</strong>Al enviar la reserva recibirás confirmación en pantalla al instante.</li>
+        <li><strong>Cancelaciones</strong>Si necesitas cancelar, avísanos con al menos 1 hora de antelación por teléfono o Instagram.</li>
+        <li><strong>¿Dudas?</strong>Llámanos al <a href="tel:+34643597025">+34 643 59 70 25</a> o escríbenos por <a href="https://instagram.com/vic.barberrr_" target="_blank" rel="noreferrer">Instagram</a>.</li>
+      </ul>
+    </aside>
+  </div>
+</main>
+<footer class="footer">
+  <div class="footer-grid" data-reveal-group>
+    <p class="statement" data-reveal>Corte, barba y estilo con acabado profesional.</p>
+    <ul data-reveal>
+      <li><a href="tel:+34643597025">+34 643 59 70 25</a></li>
+      <li><a href="mailto:victormanuelruizidrobo@gmail.com">victormanuelruizidrobo@gmail.com</a></li>
+      <li><a href="https://instagram.com/vic.barberrr_" target="_blank" rel="noreferrer">@vic.barberrr_</a></li>
+    </ul>
+    <ul data-reveal>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="servicios.html">Servicios</a></li>
+      <li><a href="reservar.html">Reservar</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+    </ul>
+  </div>
+  <p class="footer-name" aria-hidden="true">Vic Barbershop</p>
+</footer>
+<script src="vendor/gsap.min.js" defer></script>
+<script src="vendor/ScrollTrigger.min.js" defer></script>
+<script src="js/site.js" defer></script>
+<script src="js/telegram-config.js"></script>
+<script src="js/reservas.js"></script>
+<script src="js/reservas-ui.js"></script>
+</body>
+</html>

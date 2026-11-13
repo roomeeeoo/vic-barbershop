@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Contacto | Vic Barbershop</title>
+  <meta name="description" content="Contacta con Vic Barbershop por teléfono, correo electrónico o Instagram.">
+  <meta name="theme-color" content="#0c0c0b">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Contacto | Vic Barbershop">
+  <meta property="og:description" content="Contacta con Vic Barbershop por teléfono, correo electrónico o Instagram.">
+  <meta property="og:image" content="media/og.jpg">
+  <link rel="icon" href="media/icon-180.png">
+  <link rel="apple-touch-icon" href="media/icon-180.png">
+  <link rel="preload" href="fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<header class="nav">
+  <a class="brand" href="index.html" aria-label="Vic Barbershop, inicio">
+    <img src="media/logo-128.webp" width="40" height="40" alt="">
+    <span>Vic Barbershop</span>
+  </a>
+  <nav class="nav-links" aria-label="Navegación principal">
+    <a href="index.html">Inicio</a>
+    <a href="servicios.html">Servicios</a>
+    <a href="contacto.html" aria-current="page">Contacto</a>
+    <a class="btn" href="reservar.html">Reservar</a>
+  </nav>
+  <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu-movil">Menú</button>
+</header>
+<nav class="mobile-nav" id="menu-movil" aria-label="Navegación móvil">
+  <div>
+    <a class="big" href="index.html">Inicio</a>
+    <a class="big" href="servicios.html">Servicios</a>
+    <a class="big" href="reservar.html">Reservar</a>
+    <a class="big" href="contacto.html" aria-current="page">Contacto</a>
+  </div>
+  <a class="btn" href="reservar.html">Reservar cita</a>
+</nav>
+<main id="contenido">
+  <section class="page-head" data-reveal-group>
+    <div class="copy">
+      <h1 data-reveal>¿Alguna pregunta?</h1>
+      <p class="lede" data-reveal>Puedes contactarnos por teléfono, correo electrónico o Instagram. Estaremos encantados de atenderte.</p>
+    </div>
+    <figure data-clip><img src="media/corte-03-720.webp" srcset="media/corte-03-720.webp 720w, media/corte-03-1400.webp 1400w" sizes="(max-width: 860px) 100vw, 33vw" width="720" height="960" alt="Corte con rizo definido y nuca limpia, visto por detrás" style="object-position:55% 30%" fetchpriority="high"></figure>
+  </section>
+
+  <section class="wrap" style="padding-bottom: var(--section)" aria-label="Formas de contacto">
+    <div class="contact-list">
+      <div class="contact-item" data-reveal-group>
+        <h2 data-reveal>Teléfono</h2>
+        <a href="tel:+34643597025" data-reveal>+34 643 59 70 25</a>
+      </div>
+      <div class="contact-item" data-reveal-group>
+        <h2 data-reveal>Instagram</h2>
+        <a href="https://instagram.com/vic.barberrr_" target="_blank" rel="noreferrer" data-reveal>@vic.barberrr_</a>
+      </div>
+      <div class="contact-item" data-reveal-group>
+        <h2 data-reveal>Email</h2>
+        <a class="long" href="mailto:victormanuelruizidrobo@gmail.com" data-reveal>victormanuelruizidrobo@gmail.com</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap on-accent" aria-labelledby="t-reserva">
+    <div class="close" data-reveal-group>
+      <div class="close-main">
+        <h2 id="t-reserva" data-reveal>Reserva tu cita.</h2>
+        <p class="lede" data-reveal>Elige el día y la hora que mejor te venga. Las reservas se confirman al instante sin necesidad de llamar.</p>
+        <a class="btn dark" href="reservar.html" data-reveal>Reservar ahora</a>
+      </div>
+      <div class="close-side" data-reveal>
+        <p class="hours">Lunes a sábado, 10:00 a 18:00</p>
+        <p>Citas cada 30 minutos.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+<footer class="footer">
+  <div class="footer-grid" data-reveal-group>
+    <p class="statement" data-reveal>Corte, barba y estilo con acabado profesional.</p>
+    <ul data-reveal>
+      <li><a href="tel:+34643597025">+34 643 59 70 25</a></li>
+      <li><a href="mailto:victormanuelruizidrobo@gmail.com">victormanuelruizidrobo@gmail.com</a></li>
+      <li><a href="https://instagram.com/vic.barberrr_" target="_blank" rel="noreferrer">@vic.barberrr_</a></li>
+    </ul>
+    <ul data-reveal>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="servicios.html">Servicios</a></li>
+      <li><a href="reservar.html">Reservar</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+    </ul>
+  </div>
+  <p class="footer-name" aria-hidden="true">Vic Barbershop</p>
+</footer>
+<script src="vendor/gsap.min.js" defer></script>
+<script src="vendor/ScrollTrigger.min.js" defer></script>
+<script src="js/site.js" defer></script>
+</body>
+</html>

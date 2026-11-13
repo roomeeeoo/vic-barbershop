@@ -1,0 +1,13 @@
+# Credenciales reales de Telegram: nunca al repositorio
+js/telegram-config.js
+
+# Copia de la web original (contiene el token dentro del HTML)
+_backup_original_*/
+
+.env
+.env.*
+.claude/
+.taste-skill/
+node_modules/
+.DS_Store
+Thumbs.db
