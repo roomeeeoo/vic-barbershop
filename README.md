@@ -54,7 +54,7 @@ js/reservas.js          Lógica de reservas y Telegram (no tocar sin motivo)
 js/reservas-ui.js       Interfaz del formulario
 js/telegram-config.example.js   Plantilla de credenciales
 vendor/                 GSAP y ScrollTrigger (copia local)
-fonts/                  Archivo variable (copia local)
+fonts/                  Besley variable (copia local)
 media/                  Fotos y vídeos optimizados que usa la web
 media-original/         Material original sin tratar (fotos, vídeos y logo)
 ```
@@ -66,4 +66,4 @@ Las fotos y los vídeos son trabajos reales de la barbería. Los originales est�
 ## Créditos
 
 - [GSAP](https://gsap.com) y ScrollTrigger.
-- Tipografía [Archivo](https://fonts.google.com/specimen/Archivo), licencia SIL Open Font.
+- Tipografía [Besley](https://fonts.google.com/specimen/Besley), licencia SIL Open Font.

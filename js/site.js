@@ -34,7 +34,6 @@
   gsap.registerPlugin(ScrollTrigger);
   ScrollTrigger.config({ ignoreMobileResize: true });
   document.documentElement.classList.add('motion');
-  var EASE = 'power3.out';
 
   /* ── La barra se esconde al bajar y vuelve al subir ───────────────────── */
   var nav = document.querySelector('.nav');
@@ -47,24 +46,6 @@
     onLeaveBack: function () { nav.classList.remove('hide'); }
   });
 
-  /* ── Entradas escalonadas por bloque ──────────────────────────────────── */
-  document.querySelectorAll('[data-reveal-group]').forEach(function (group) {
-    var items = group.querySelectorAll('[data-reveal]');
-    if (!items.length) return;
-    gsap.to(items, {
-      opacity: 1, y: 0, duration: .9, ease: EASE, stagger: .08,
-      scrollTrigger: { trigger: group, start: 'top 82%', once: true }
-    });
-  });
-  document.querySelectorAll('[data-clip]').forEach(function (el) {
-    gsap.to(el, {
-      clipPath: 'inset(0 0 0% 0)', duration: 1.2, ease: 'power4.out',
-      scrollTrigger: { trigger: el, start: 'top 85%', once: true }
-    });
-    var img = el.querySelector('img');
-    if (img) gsap.from(img, { scale: 1.18, duration: 1.6, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 85%', once: true } });
-  });
-
   /* ── Hero: bucle real + deriva con el scroll ──────────────────────────── */
   var heroVideo = document.querySelector('.hero-media video');
   if (heroVideo) {
@@ -75,8 +56,6 @@
       yPercent: 10, scale: 1.08, ease: 'none',
       scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
     });
-    gsap.from('.hero-copy > *', { opacity: 0, y: 36, duration: 1.1, ease: EASE, stagger: .09, delay: .1 });
-    gsap.from('.hero-media', { clipPath: 'inset(100% 0 0 0)', duration: 1.3, ease: 'power4.out' });
   }
 
   /* ── Vídeo controlado por el scroll ───────────────────────────────────── */
@@ -151,7 +130,7 @@
         onUpdate: function (self) { vScrub.set(self.progress); }
       }
     });
-    tl.fromTo('.vuelta .meter i', { scaleX: 0 }, { scaleX: 1, ease: 'none', duration: 1 }, 0);
+    tl.to({}, { duration: 1 }, 0);
     var n = beats.length, slot = 1 / n;
     beats.forEach(function (b, i) {
       var at = i * slot;
@@ -176,8 +155,7 @@
       }
     })
       .fromTo(tVideoWrap, { clipPath: 'inset(30% 24% 30% 24%)' }, { clipPath: 'inset(0% 0% 0% 0%)', ease: 'power2.inOut', duration: .55 }, 0)
-      .fromTo(tVideoWrap.querySelectorAll('video, img'), { scale: 1.3 }, { scale: 1, ease: 'power2.inOut', duration: .55 }, 0)
-      .fromTo('.textura-copy > *', { opacity: 0, y: 40 }, { opacity: 1, y: 0, stagger: .04, duration: .16, ease: 'power2.out' }, 0);
+      .fromTo(tVideoWrap.querySelectorAll('video, img'), { scale: 1.3 }, { scale: 1, ease: 'power2.inOut', duration: .55 }, 0);
   }
 
   /* ── Galería: recorrido horizontal fijado (solo escritorio) ───────────── */
@@ -209,15 +187,6 @@
         gsap.set(track, { clearProps: 'transform' });
         void stage;
       };
-    });
-  }
-
-  /* ── Nombre del pie: entra desde abajo ────────────────────────────────── */
-  var footName = document.querySelector('.footer-name');
-  if (footName) {
-    gsap.from(footName, {
-      yPercent: 40, opacity: 0, duration: 1.2, ease: EASE,
-      scrollTrigger: { trigger: footName, start: 'top 96%', once: true }
     });
   }
 
